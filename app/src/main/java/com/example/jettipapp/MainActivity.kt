@@ -3,6 +3,7 @@ package com.example.jettipapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
 
                 App {
-                    Text(text = "Helloo")
+                   TopHeader(23.9)
                 }
             }
         }
@@ -49,6 +50,25 @@ fun App(context: @Composable () -> Unit)
     }
 }
 
+
+@Preview
+@Composable
+fun MainContext()
+{
+    Surface(modifier = Modifier
+        .padding(8.dp)
+        .fillMaxWidth(),
+    shape = RoundedCornerShape(corner = CornerSize(8.dp)),
+    border = BorderStroke(width = 1.dp, color = Color.LightGray)
+    )
+    {
+        Column() {
+
+        }
+
+    }
+}
+
 @Composable
 fun Greeting(name: String) {
     Text(text = "Hello $name!")
@@ -63,7 +83,8 @@ fun TopHeader(totalPerPerson :Double = 0.0)
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
-            .clip(shape = CircleShape.copy(all = CornerSize(12.dp))
+            .clip(
+                shape = CircleShape.copy(all = CornerSize(12.dp))
             ), color = Color(0xFFE9D7F7)
     ) {
         Column(modifier = Modifier.padding(12.dp)
