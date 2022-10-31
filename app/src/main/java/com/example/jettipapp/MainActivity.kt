@@ -18,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -75,7 +76,24 @@ fun App(context: @Composable () -> Unit)
 @Composable
 fun MainContext()
 {
-    billForm( ){ billAmt ->
+    val splitCountState = remember {
+        mutableStateOf(1)
+    }
+
+
+
+
+    val range = IntRange(1,100)
+
+
+    val tipAmountState = remember {
+        mutableStateOf(0.0)
+    }
+
+    val totalPerPersonState = remember {
+        mutableStateOf(0.0)
+    }
+    billForm( range = range,splitCountState =splitCountState,tipAmountState = tipAmountState, totalPerPersonState = totalPerPersonState){ billAmt ->
 
 
     }
@@ -121,7 +139,12 @@ fun DefaultPreview() {
 
 @ExperimentalComposeUiApi
 @Composable
-fun billForm(modifier: Modifier = Modifier
+fun billForm(modifier: Modifier = Modifier,
+
+              range: IntRange = 1..100
+             ,splitCountState:MutableState<Int>
+             ,tipAmountState: MutableState<Double>
+             ,totalPerPersonState: MutableState<Double>
              ,onValChange: (String) -> Unit = {}
 )
 {
@@ -140,23 +163,7 @@ fun billForm(modifier: Modifier = Modifier
     }
 
     val tipPercentage = (sliderPostionState.value *100).toInt()
-    val splitCountState = remember {
-        mutableStateOf(1)
-    }
 
-
-
-
-    val range = IntRange(1,100)
-
-
-    val tipAmountState = remember {
-        mutableStateOf(0.0)
-    }
-
-    val totalPerPersonState = remember {
-        mutableStateOf(0.0)
-    }
 
     Column() {
 
